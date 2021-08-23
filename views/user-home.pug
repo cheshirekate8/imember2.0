@@ -1,0 +1,53 @@
+extends layout
+
+include utils.pug
+
+append head
+  link(rel="stylesheet" href="/stylesheets/user-home.css")
+  script(src="/javascripts/user-home.js" type="module" defer)
+
+  .header-div
+    a(href='http://list-imember.herokuapp.com/')
+      img(src=" ../berry-single.png", class= "berry-single")
+    h1(class="iMember-h1") iMember
+    div.logButtons
+      a(href='http://list-imember.herokuapp.com/users/logout' class="logout-container")
+        button(name="New List" class="logout-button") Logout
+
+block content
+  h1(class="welcome-msg") Welcome to the User Home
+  ul(class="button-container")
+    li
+      a(href='http://list-imember.herokuapp.com/lists/new')
+        button(name="New List" class="button") New List
+    li
+      a(href='http://list-imember.herokuapp.com/tasks/new')
+        button(name="New List" class="button") New Task
+  div(class="table-container")
+    table(class="table" style="width:70%" border="1")
+      thead(class="table-head")
+        tr
+          th(scope='col' class="table-col-name") Lists
+          th(scope='col' class="table-col-name") Tasks
+          th(scope='col' class="table-col-name") Due
+          th(scope='col' class="table-col-name") Start
+          th(scope='col' class="table-col-name") Priority
+          th(scope='col' class="table-col-name") Repeat
+          th(scope='col' class="table-col-name") Location
+          th(scope='col' class="table-col-name") Complete
+      tbody(class="table-body")
+        each newTask in tasks
+          tr
+            td(class="table-data")= lists.name
+            td(class="table-data")= newTask.content
+            td(class="table-data")= newTask.dueDate
+            td(class="table-data")= newTask.startDate
+            td(class="table-data")= newTask.priority
+            td(class="table-data")= newTask.repeat
+            td(class="table-data")= newTask.location
+            td(class="table-data")
+              a(href=`http://localhost:8080/tasks/delete/${newTask.id}`)
+                button(type="click" method="delete") Done!
+          //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
+
+        //- each newList in lists

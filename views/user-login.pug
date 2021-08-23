@@ -1,0 +1,31 @@
+extends layout.pug
+
+include utils.pug
+
+append head
+  link(rel="stylesheet" href="/stylesheets/forms.css")
+  link(rel="stylesheet" href="/stylesheets/background-left.css")
+  script(src="/javascripts/demo-login.js" type="module" defer)
+
+  .header-div
+    a(href='http://list-imember.herokuapp.com/')
+      img(src=" ../berry-single.png", class= "berry-single")
+    h1(class="iMember-h1") iMember
+    div.logButtons
+      a(href='http://list-imember.herokuapp.com/users/register' class='logAndReg' id='logBtn')
+        button(name='Register' class='logAndRegButtons') Register
+
+block content
+  body
+    .main
+      +validationErrorSummary(errors)
+      form(action='/users/login' method='post' class="loginForm")
+        input(type='hidden' name='_csrf' value=csrfToken)
+        +field('Email Address', 'email', email)
+        +field('Password', 'password', null, 'password')
+        div(class='submit-button')
+        button(type='submit') Login
+        a(href='/users/register') Don't have an account?
+        a(href='/')
+          button(type="button") Cancel
+        button(type="submit" id="demo") Demo User
