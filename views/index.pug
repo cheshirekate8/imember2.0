@@ -10,17 +10,32 @@ append head
       img(src=" ../berry-single.png", class= "berry-single")
     h1(class="iMember-h1") iMember
     div.logButtons
-      a(href='/users/register' class='logAndReg' id='logBtn')
-        button(name='Register' class='logAndRegButtons') Register
-      a(href='/users/login' class='logAndReg' id='regBtn')
-        button(name='Login' class='logAndRegButtons') Login
+      ul(class='nav-container')
+        li(class='nav-link-wrapper')
+          a(class='nav-link' href="/users/register") Register
+        li(class='nav-link-wrapper')
+          a(class='nav-link' href="/users/login") Login
+    //- previous
+    //- div.logButtons
+    //-   a(href='/users/about' class='about-link' id='logBtn')
+    //-     button(name='About' class='logAndRegButtons') About
+    //-   a(href='/users/register' class='logAndReg' id='logBtn')
+    //-     button(name='Register' class='logAndRegButtons') Register
+    //-   a(href='/users/login' class='logAndReg' id='regBtn')
+    //-     button(name='Login' class='logAndRegButtons') Login
 
 block content
-  div.berriesAndThoughts
-    div(id="thought-right")
-      div(id="words-right")
-      img(src='thought-bubble-right.png' class="bubble-right")
-    img(src='Member-berries.png' class="berries")
-    div(id ="thought-left")
-      div(id ="words-left")
-      img(src='thought-bubble-left.png' class="bubble-left")
+  div.index-text-container
+    h1(class='index-text') The smart to-do app for busy people.
+  div.main-wrapper
+    div.berriesAndThoughts
+      div(id="thought-right")
+        div(id="words-right")
+        img(src='thought-bubble-right.png' class="bubble-right")
+      img(src='Member-berries.png' class="berries")
+      div(id ="thought-left")
+        div(id ="words-left")
+        img(src='thought-bubble-left.png' class="bubble-left")
+  div.footer-links
+    h1(class='footer-title') Brought to you by Ben and Katie
+    h1(class='footer-title') Need to add github and linkedin links
