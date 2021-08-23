@@ -5,17 +5,17 @@ append head
   link(rel="stylesheet" href="/stylesheets/task-new.css")
 
   .header-div
-    a(href='http://list-imember.herokuapp.com/')
+    a(href='/')
       img(src=" ../berry-single.png", class= "berry-single")
     h1(class="iMember-h1") iMember
     div.logButtons
-      a(href='http://list-imember.herokuapp.com/users/logout' class="logout-container")
+      a(href='/users/logout' class="logout-container")
         button(name="New List" class="logout-button") Logout
 
 block content
   body
     .main
-      a(href='http://list-imember.herokuapp.com/home') Home
+      a(href='/') Home
       form(action="/tasks/new" method="post")
         div.formGroup
           label(for="content") Task
