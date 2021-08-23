@@ -1,7 +1,18 @@
+body {
+    background-color: #fff;
+}
+
 .berries {
     margin-top: 10vh;
     height: 513px;
     width: 311px;
+}
+
+.main-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
 }
 
 .berriesAndThoughts {
@@ -9,7 +20,9 @@
     justify-content: center;
     align-items:center;
     flex-direction: row;
-}
+    position: static;
+
+   }
 
 .bubble-left,
 .bubble-right {
@@ -32,4 +45,69 @@
     margin-left: 30px;
     margin-top: 65px;
     text-align: center;
+}
+
+/* new code */
+/* NAVBAR CSS TO USE ACROSS TEMPLATES */
+.iMember-h1 {
+    color: #fff;
+}
+
+.index-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.index-text {
+    font-size: 30px;
+    font-family: sans-serif;
+}
+
+.nav-container {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link-wrapper {
+    color: #fff;
+    font-size: 16px;
+    border: 0.1em solid var(--c);
+    border-radius: 0.5em;
+    width: 100px;
+    height: 3em;
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    /* position: relative; */
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+    padding-top:15px;
+}
+
+.nav-link {
+    align-items: baseline;
+    text-align: center;
+    text-decoration: none;
+    line-height: 20px;
+}
+
+.nav-link:hover {
+    color: #A48ABF;
+    text-decoration: underline overline #A48ABF;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.main-wrapper {
+    height: 80vh;
 }
