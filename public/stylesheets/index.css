@@ -127,19 +127,36 @@ body {
 
 .footer-title {
     font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    margin-bottom: 0;
 }
 
 .left-footer {
     display: flex;
     justify-content: space-evenly;
+    width: 150px;
+    align-items: center;
 }
 
 .right-footer {
     display: flex;
     justify-content: space-evenly;
+    width: 150px;
+    align-items: center;
 }
 
 
-.fab .fa-github {
-    size: 20px;
+.fab {
+    size: 50px;
+    background-color: #443A7B;
+    margin: auto;
+    display: flex;
+
+}
+
+.fa-linkedin {
+    size: 50px;
+}
+
+.fa-github {
+    size: 50px;
 }
