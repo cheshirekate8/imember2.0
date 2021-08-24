@@ -3,6 +3,8 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
+  //- fontawesome
+  <script src="https://kit.fontawesome.com/fd280b8079.js" crossorigin="anonymous"></script>
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
   .header-div
@@ -36,6 +38,12 @@ block content
       div(id ="thought-left")
         div(id ="words-left")
         img(src='thought-bubble-left.png' class="bubble-left")
-  div.footer-links
-    h1(class='footer-title') Brought to you by Ben and Katie
-    h1(class='footer-title') Need to add github and linkedin links
+  footer.footer-links
+    div.left-footer
+      h1(class='footer-title') Benjamin Yoo
+        <i class="fab fa-github"></i>
+        <i class="fab fa-linkedin"></i>
+    div.right-footer
+      h1(class='footer-title') Katie Young
+        <i class="fab fa-github"></i>
+        <i class="fab fa-linkedin"></i>

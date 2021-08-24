@@ -6,6 +6,7 @@ body {
     margin-top: 10vh;
     height: 513px;
     width: 311px;
+    background-color: #fff;
 }
 
 .main-wrapper {
@@ -21,7 +22,7 @@ body {
     align-items:center;
     flex-direction: row;
     position: static;
-
+    background-color: #fff;
    }
 
 .bubble-left,
@@ -32,10 +33,12 @@ body {
 
 .bubble-left {
     margin-bottom: 135px;
+    background-color: #fff;
 }
 
 .bubble-right {
     margin-bottom: -30px;
+    background-color: #fff;
 }
 
 #words-left,
@@ -57,7 +60,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 30px;
 }
 
 .index-text {
@@ -110,4 +113,33 @@ body {
 
 .main-wrapper {
     height: 80vh;
+}
+
+.footer-links {
+    font-family: sans-serif;
+    color: #fff;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #443A7B;
+}
+
+.footer-title {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
+.left-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.right-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.fab .fa-github {
+    size: 20px;
 }
