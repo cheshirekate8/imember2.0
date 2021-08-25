@@ -17,7 +17,7 @@ const usersRouter = require('./routes/users')
 
 const tasksRouter = require('./routes/tasks')
 
-const listsRouter = require('./routes/lists-new.js')
+const listsRouter = require('./routes/lists.js')
 
 
 const { csrfProtection, asyncHandler } = require('./routes/utils')
@@ -43,14 +43,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // set up session middleware
 
-// app.use(
-//   session({
-//     secret: 'superSecret',
-//     store,
-//     saveUninitialized: false,
-//     resave: false,
-//   })
-// );
+app.use(
+  session({
+    secret: 'superSecret',
+    store,
+    saveUninitialized: false,
+    resave: false,
+  })
+);
 
 // create Session table if it doesn't already exist
 store.sync();

@@ -9,20 +9,6 @@ const { requireAuth } = require('../auth')
 
 const router = express.Router()
 
-
-
-router.get('/new', requireAuth, csrfProtection, asyncHandler(async(req, res, next) => {
-
-  const id = req.params.id
-
-  const newList = db.List.build()
-  res.render('list-new', {
-    title: 'Create List',
-    newList,
-    csrfToken: req.csrfToken()
-  })
-}))
-
 const listValidators = [
   check("name")
     .exists({ checkFalsy: true })
@@ -39,6 +25,15 @@ const listValidators = [
     })
 ]
 
+//NEW LIST'S GET AND POST
+router.get('/new', requireAuth, csrfProtection, asyncHandler(async(req, res, next) => {
+  const newList = db.List.build()
+  res.render('list-new', {
+    title: 'Create List',
+    newList,
+    csrfToken: req.csrfToken()
+  })
+}))
 
 router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(async(req, res, next) => {
   if(req.session.auth){
@@ -71,35 +66,87 @@ router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(as
       })
     }
   }
-
-
 }))
 
-// edit list
-router.put('/:id(\\d+)', listValidators, asyncHandler(async (req, res, next) => {
+//GET ALL OF A LISTS TASKS
+router.get('/:id', requireAuth, csrfProtection, asyncHandler(async(req, res, next) => {
+
+  const id = req.params.id
+
+  const ListsTasks = await db.Task.findAll({
+    where : {
+      list_Id : id
+    }
+  })
+
+  const list = await db.List.findByPk(id)
+
+  // console.log(ListsTasks)
+//
+  // console.log(id)
+  res.render('list', {
+    title: 'Render List',
+    ListsTasks,
+    list,
+    csrfToken: req.csrfToken()
+  })
+}))
+
+// GET AND POST EDIT LIST
+router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const list = await db.List.findByPk(id);
+  console.log(list)
+  res.render('edit-list', {
+    title: 'Edit List',
+    list,
+    csrfToken: req.csrfToken()
+  })
+}))
+
+router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, listValidators, asyncHandler(async (req, res, next) => {
+
+  const id = parseInt(req.params.id, 10);
+
+  const list = await db.List.findByPk(id);
+
   if (list) {
+
     const { name } = req.body;
-    await list.update({ name });
-    res.json({ list })
-  } else {
-    next(listValidators(id));
+
+    const validatorErrors = validationResult(req)
+
+    if (validatorErrors.isEmpty()) {
+      await list.update({ name });
+      res.redirect(`/home`)
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg)
+      res.render('edit-list', {
+        title: 'Edit List',
+        list,
+        errors,
+        csrfToken: req.csrfToken()
+      })
+    }
+
   }
 
 }))
 
 
 // delete list
-router.delete('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.post('/:id(\\d+)/delete', asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id);
   const list = await db.List.findByPk(id);
+  console.log('LIST ======>', list)
   if (list) {
     await list.destroy();
     res.status(204).end();
+    res.redirect(`/home`)
   } else {
     next(listValidators(id));
   }
+
 }))
 
 module.exports = router;
