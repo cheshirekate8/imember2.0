@@ -4,8 +4,6 @@ include utils.pug
 
 append head
   link(rel="stylesheet" href="/stylesheets/user-home.css")
-  script(src="/javascripts/user-home.js" type="module" defer)
-
   .header-div
     a(href='/home')
       img(src=" ../berry-single.png", class= "berry-single")
@@ -13,19 +11,13 @@ append head
     div.logButtons
       a(href='/users/logout' class="logout-container")
         button(name="New List" class="logout-button") Logout
-
 block content
-  h1(class="welcome-msg") Welcome to the User Home
-  ul(class="button-container")
-    li
-      a(href='/lists/new')
-        button(name="New List" class="button") New List
-    li
-      a(href='/tasks/new')
-        button(name="New List" class="button") New Task
-  each list in lists
-    li
-      a(href=`/lists/${list.id}`)= list.name
+  h1(class="welcome-msg")= list.name
+  div
+    a(href=`/lists/${list.id}/edit`)
+      button(name="New List" class="button") Edit  List
+    a(href=`/lists/${list.id}/delete`)
+      button(name="New List" class="button") Delete  List
   div(class="table-container")
     table(class="table" style="width:70%" border="1")
       thead(class="table-head")
@@ -36,7 +28,7 @@ block content
           th(scope='col' class="table-col-name") Priority
           th(scope='col' class="table-col-name") Complete
       tbody(class="table-body")
-        each newTask in tasks
+        each newTask in ListsTasks
           tr
             td(class="table-data")= newTask.content
             td(class="table-data")= newTask.dueDate
@@ -45,6 +37,3 @@ block content
             td(class="table-data")
               a(href=`http://localhost:8080/tasks/delete/${newTask.id}`)
                 button(type="click" method="delete") Done!
-          //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
-
-        //- each newList in lists

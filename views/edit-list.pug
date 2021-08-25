@@ -19,8 +19,8 @@ block content
     a(href='/') Home
     +validationErrorSummary(errors)
     body
-      form(action="/lists/new" method="post")
+      form(action=`/lists/${list.id}/edit` method="post")
         input(type="hidden", name="_csrf" value=csrfToken)
-        +field('Name', 'name', newList.name)
+        +field('Name', 'name', list.name)
         div.buttonGroup
-          button(type="submit") Create List
+          button(type="submit") Edit List
