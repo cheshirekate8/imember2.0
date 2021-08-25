@@ -10,6 +10,13 @@ input {
 form {
     padding: 50px;
     margin: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, .5);
+    border-radius: 5px;
+}
+
+label {
+    background-color: #fff;
 }
 
 .alert-danger {
@@ -43,4 +50,8 @@ label {
     align-content: center;
     text-align: center;
     margin-right: 10px;
+}
+
+.iMember-h1 {
+    color: #fff;
 }
