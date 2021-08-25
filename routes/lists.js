@@ -26,7 +26,7 @@ const listValidators = [
 ]
 
 //NEW LIST'S GET AND POST
-router.get('/new', requireAuth, csrfProtection, asyncHandler(async(req, res, next) => {
+router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const newList = db.List.build()
   res.render('list-new', {
     title: 'Create List',
@@ -35,8 +35,8 @@ router.get('/new', requireAuth, csrfProtection, asyncHandler(async(req, res, nex
   })
 }))
 
-router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(async(req, res, next) => {
-  if(req.session.auth){
+router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(async (req, res, next) => {
+  if (req.session.auth) {
 
     const { userId } = req.session.auth
 
@@ -69,20 +69,20 @@ router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(as
 }))
 
 //GET ALL OF A LISTS TASKS
-router.get('/:id', requireAuth, csrfProtection, asyncHandler(async(req, res, next) => {
+router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
 
   const id = req.params.id
 
   const ListsTasks = await db.Task.findAll({
-    where : {
-      list_Id : id
+    where: {
+      list_Id: id
     }
   })
 
   const list = await db.List.findByPk(id)
 
   // console.log(ListsTasks)
-//
+  //
   // console.log(id)
   res.render('list', {
     title: 'Render List',
@@ -134,19 +134,22 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, listValidators, asyn
 }))
 
 
-// delete list
+// GET AND POST DELETE LIST
+router.get('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
+  const id = parseInt(req.params.id, 10);
+  const list = await db.List.findByPk(id);
+  res.render('delete-list', {
+    title: 'Delete List',
+    list,
+    csrfToken: req.csrfToken()
+  })
+}))
+
 router.post('/:id(\\d+)/delete', asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id);
   const list = await db.List.findByPk(id);
-  console.log('LIST ======>', list)
-  if (list) {
-    await list.destroy();
-    res.status(204).end();
-    res.redirect(`/home`)
-  } else {
-    next(listValidators(id));
-  }
-
+  await list.destroy();
+  res.redirect(`/home`)
 }))
 
 module.exports = router;

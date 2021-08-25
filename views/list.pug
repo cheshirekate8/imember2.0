@@ -16,9 +16,8 @@ block content
   div
     a(href=`/lists/${list.id}/edit`)
       button(name="New List" class="button") Edit  List
-    form
-      a(href=`/lists/${list.id}/delete` method='delete')
-        button(type="click" method="delete") Delete List
+    a(href=`/lists/${list.id}/delete`)
+      button(name="New List" class="button") Delete  List
   div(class="table-container")
     table(class="table" style="width:70%" border="1")
       thead(class="table-head")

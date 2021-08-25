@@ -1,0 +1,27 @@
+extends layout
+
+include utils.pug
+
+append head
+  link(rel="stylesheet" href="/stylesheets/forms.css")
+  link(rel="stylesheet" href="/stylesheets/list-new.css")
+
+  .header-div
+    a(href='/home')
+      img(src=" ../berry-single.png", class= "berry-single")
+    h1(class="iMember-h1") iMember
+    div.logButtons
+      a(href='/users/logout' class="logout-container")
+        button(name="New List" class="logout-button") Logout
+
+block content
+  .main
+    a(href='/') Home
+    body
+      div= list.name
+        p Delete this list?
+          form(action=`/lists/${list.id}/delete` method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            button(type='submit') Delete List
+            a(class='btn btn-warning ml-2' href='/' role='button')
+              button(type='submit') Cancel
