@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     content: DataTypes.STRING,
-    list_Id: DataTypes.INTEGER,
-    user_Id: DataTypes.INTEGER,
+    listId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     dueDate: DataTypes.DATEONLY,
     dueTime: DataTypes.TIME,
     priority: DataTypes.INTEGER,
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Task.associate = function (models) {
     // associations can be defined here
-    Task.belongsTo(models.User, { foreignKey: 'user_Id' })
-    Task.belongsTo(models.List, { foreignKey: 'list_Id' })
+    Task.belongsTo(models.User, { foreignKey: 'userId' })
+    Task.belongsTo(models.List, { foreignKey: 'listId' })
   };
   return Task;
 };

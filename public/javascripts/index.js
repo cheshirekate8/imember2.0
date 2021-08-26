@@ -13,7 +13,6 @@ window.addEventListener("load", (event)=>{
     'the Death Star', 'cutting open Tauntauns', 'The Force', 'Stormtroopers']
     const memberFunction = () => {
         let randomNumber = Math.floor(Math.random() * memberArray.length);
-        console.log(randomNumber)
         return `Member ${memberArray[randomNumber]}?`
     };
 

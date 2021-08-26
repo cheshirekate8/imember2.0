@@ -11,22 +11,18 @@ router.get('/', function (req, res, next) {
 
 router.get(`/home`, csrfProtection, asyncHandler(async (req, res) => {
   const id = await req.session.auth.userId
-  console.log(id)
   const tasks = await db.Task.findAll({
     where : {
-      'user_Id' : id
+      'userId' : id
     },
     include: db.List
   })
   const lists = await db.List.findAll({
     where : {
-      'user_Id' : id,
+      'userId' : id,
     }
   })
-  // console.log('IS USER HERE?? -------', req.session)
-  tasks.forEach(task => {
-    console.log(task.List.name)
-  })
+
   res.render('user-home', {
     title: 'Home',
     csrfToken: req.csrfToken(),

@@ -49,6 +49,8 @@ block content
             td(class="table-data")= newTask.priority
             td(class="table-data")= newTask.complete
             td(class="table-data")
-              a(href=`http://localhost:8080/tasks/delete/${newTask.id}`)
-                button(type="click" method="delete") Done!
+              a(href=`http://localhost:8080/tasks/${newTask.id}/edit`)
+                button(class=button) Edit!
+              a(href=`http://localhost:8080/tasks/${newTask.id}/delete`)
+                button(class=button) Done!
           //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
