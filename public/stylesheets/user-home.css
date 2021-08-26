@@ -62,10 +62,27 @@ button:not(.logout-button) {
 }
 
 .list-container {
-  background-color: burlywood;
-  margin-right: 3rem;
+  margin-right: 2rem;
+  color: #fff;
 }
 
 a {
     text-decoration: none;
+}
+
+.iMember-h1 {
+  color: #fff;
+}
+
+.list-head {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
+.list-table {
+  min-width: 300px;
+
 }
