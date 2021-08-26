@@ -15,42 +15,51 @@ append head
         button(name="New List" class="logout-button") Logout
 
 block content
-  h1(class="welcome-msg") Welcome to the User Home
-  ul(class="button-container")
-    li
-      a(href='/lists/new')
-        button(name="New List" class="button") New List
-    li
-      a(href='/tasks/new')
-        button(name="New List" class="button") New Task
-  each list in lists
-    li
-      a(href=`/lists/${list.id}`)= list.name
-  div(class="table-container")
-    table(class="table" style="width:70%" border="1")
-      thead(class="table-head")
-        tr
-          //- th(scope='col' class="table-col-name") Lists
-          th(scope='col' class="table-col-name") Task
-          th(scope='col' class="table-col-name") List
-          th(scope='col' class="table-col-name") Due Date
-          th(scope='col' class="table-col-name") Due Time
-          th(scope='col' class="table-col-name") Priority
-          th(scope='col' class="table-col-name") Complete
-      tbody(class="table-body")
-        each newTask in tasks
-          //- script.
-          //-   console.log(newTask.content)
+  div(class='table-wrapper')
+    div(class='list-container')
+      table(class='list-table')
+        thead(class='list-head')
           tr
-            td(class="table-data")= newTask.content
-            td(class="table-data")= newTask.List.name
-            td(class="table-data")= newTask.dueDate
-            td(class="table-data")= newTask.dueTime
-            td(class="table-data")= newTask.priority
-            td(class="table-data")= newTask.complete
-            td(class="table-data")
-              a(href=`/tasks/${newTask.id}/edit`)
-                button(class=button) Edit!
-              a(href=`/tasks/${newTask.id}/delete`)
-                button(class=button) Done!
-          //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
+            th My Lists
+        tbody(class='list-table-body')
+          each list in lists
+            tr
+              td
+                a(href=`/lists/${list.id}`)= list.name
+          td
+            a(href='/lists/new')
+              button(name="New List" class="button") New List
+    div(class="table-container")
+      table(class="table" border="1")
+        thead(class="table-head")
+          tr
+            //- th(scope='col' class="table-col-name") Lists
+            th(scope='col' class="table-col-name") Task
+            th(scope='col' class="table-col-name") List
+            th(scope='col' class="table-col-name") Due Date
+            th(scope='col' class="table-col-name") Due Time
+            th(scope='col' class="table-col-name") Priority
+            th(scope='col' class="table-col-name") Complete
+            th(scope='col' class="table-col-name") Actions
+        tbody(class="table-body")
+          each newTask in tasks
+            //- script.
+            //-   console.log(newTask.content)
+            tr
+              td(class="table-data")= newTask.content
+              td(class="table-data")= newTask.List.name
+              td(class="table-data")= newTask.dueDate
+              td(class="table-data")= newTask.dueTime
+              td(class="table-data")= newTask.priority
+              td(class="table-data")= newTask.complete
+              td(class="table-data")
+                a(href=`/tasks/${newTask.id}/edit`)
+                  button(class=button) Edit!
+                a(href=`/tasks/${newTask.id}/delete`)
+                  button(class=button) Done!
+          tr
+            td(colspan='7' style='text-align:center')
+              a(href='/tasks/new')
+                button(name="New List" class="button") New Task
+
+              //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details

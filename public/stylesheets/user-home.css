@@ -53,3 +53,36 @@ button:not(.logout-button) {
   color: #443a7b;
   font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.list-container {
+  margin-right: 2rem;
+  color: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.iMember-h1 {
+  color: #fff;
+}
+
+.list-head {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
+.list-table {
+  min-width: 300px;
+
+}
