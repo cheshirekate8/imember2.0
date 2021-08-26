@@ -17,7 +17,7 @@ append head
 block content
   div(class='table-wrapper')
     div(class='list-container')
-      table(class='list-table')
+      table(class='list-table' border='0')
         thead(class='list-head')
           tr
             th My Lists
@@ -28,7 +28,7 @@ block content
                 a(href=`/lists/${list.id}`)= list.name
           td
             a(href='/lists/new')
-              button(name="New List" class="button") New List
+              button(name="New List" class="button") Create List
     div(class="table-container")
       table(class="table" border="1")
         thead(class="table-head")
@@ -54,12 +54,12 @@ block content
               td(class="table-data")= newTask.complete
               td(class="table-data")
                 a(href=`/tasks/${newTask.id}/edit`)
-                  button(class=button) Edit!
+                  button(class='button') Edit!
                 a(href=`/tasks/${newTask.id}/delete`)
-                  button(class=button) Done!
+                  button(class='button') Done!
           tr
-            td(colspan='7' style='text-align:center')
+            td(colspan='7' style='text-align:center' class='task-td')
               a(href='/tasks/new')
-                button(name="New List" class="button") New Task
+                button(name="New List" class="button") Create Task
 
               //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
