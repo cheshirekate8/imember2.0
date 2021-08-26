@@ -33,7 +33,8 @@ block content
           //- th(scope='col' class="table-col-name") Lists
           th(scope='col' class="table-col-name") Task
           th(scope='col' class="table-col-name") List
-          th(scope='col' class="table-col-name") Due
+          th(scope='col' class="table-col-name") Due Date
+          th(scope='col' class="table-col-name") Due Time
           th(scope='col' class="table-col-name") Priority
           th(scope='col' class="table-col-name") Complete
       tbody(class="table-body")
@@ -44,6 +45,7 @@ block content
             td(class="table-data")= newTask.content
             td(class="table-data")= newTask.List.name
             td(class="table-data")= newTask.dueDate
+            td(class="table-data")= newTask.dueTime
             td(class="table-data")= newTask.priority
             td(class="table-data")= newTask.complete
             td(class="table-data")

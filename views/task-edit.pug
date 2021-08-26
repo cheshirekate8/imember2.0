@@ -22,11 +22,8 @@ block content
         form(action="/tasks/new" method="post")
           input(type="hidden", name="_csrf" value=csrfToken)
           +field('Task', 'content', task.content)
-          div.formGroup
-            label(for="dueDate") Due Date
-              input(name="dueDate" value='#{task.dueDate}' type="datetime-local" onFocus='#{task.dueDate}')
-              script
-                =console.log(task.dueDate)
+          +field('Due Date', 'dueDate', task.dueDate, 'date')
+          +field('Due Time', 'dueTime', task.dueTime, 'time')
           div.formGroup
             label(for="priority") Priority
             select(name="priority" value=task.priority)

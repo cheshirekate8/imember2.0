@@ -43,6 +43,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
     const {
       content,
       dueDate,
+      dueTime,
       priority,
       complete,
       listId
@@ -53,6 +54,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       list_Id: listId,
       user_Id: userId,
       dueDate,
+      dueTime,
       priority,
       complete: complete === "off",
       // complete: false
