@@ -81,9 +81,6 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res, ne
 
   const list = await db.List.findByPk(id)
 
-  // console.log(ListsTasks)
-  //
-  // console.log(id)
   res.render('list', {
     title: 'Render List',
     ListsTasks,
@@ -96,7 +93,6 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res, ne
 router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const list = await db.List.findByPk(id);
-  console.log(list)
   res.render('list-edit', {
     title: 'Edit List',
     list,

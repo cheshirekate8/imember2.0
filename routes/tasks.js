@@ -11,14 +11,14 @@ const taskValidators = [
     .withMessage("Please provide a task.")
     .isLength({ max: 255 })
     .withMessage("Must not exceed 255 characters"),
-  ] //! ADD MORE VALIDATORS
+] //! ADD MORE VALIDATORS
 
 router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const newTask = db.Task.build()
   const id = req.session.auth.userId
   const lists = await db.List.findAll({
-    where : {
-      'userId' : id
+    where: {
+      'userId': id
     }
   })
   res.render('task-new', {
@@ -30,17 +30,17 @@ router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, ne
 }))
 
 
-router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(async (req, res, next) => {
+router.post('/new', requireAuth, csrfProtection, taskValidators, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
     const { userId } = req.session.auth
 
     const lists = await db.List.findAll({
-      where : {
-        'userId' : userId
+      where: {
+        'userId': userId
       }
     })
 
-    const {
+    let {
       content,
       dueDate,
       dueTime,
@@ -49,10 +49,17 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       listId
     } = req.body
 
+    if (!dueDate) {
+      dueDate = null
+    }
+    if (!dueTime) {
+      dueTime = null
+    }
+
     const newTask = db.Task.build({
       content,
-      listId: listId,
-      userId: userId,
+      listId,
+      userId,
       dueDate,
       dueTime,
       priority,
@@ -89,11 +96,10 @@ router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, re
   const { userId } = req.session.auth
 
   const lists = await db.List.findAll({
-    where : {
-      'userId' : userId
+    where: {
+      'userId': userId
     }
   })
-  // console.log(list)
   res.render('task-edit', {
     title: 'Edit Task',
     task,
@@ -111,48 +117,48 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, taskValidators, asyn
   const { userId } = req.session.auth
 
   const lists = await db.List.findAll({
-    where : {
-      'userId' : userId
+    where: {
+      'userId': userId
     }
   })
 
-  if (task) {
 
-    let {
-      content,
-      listId,
-      dueDate,
-      dueTime,
-      priority,
-      complete,
-    } = req.body
 
-    if (!dueDate) {
-      dueDate = null
-    }
-    if (!dueTime) {
-      dueTime = null
-    }
+  let {
+    content,
+    listId,
+    dueDate,
+    dueTime,
+    priority,
+    complete,
+  } = req.body
 
-    console.log('LIST ID HERE NOW =====> ', listId)
-
-    const validatorErrors = validationResult(req)
-
-    if (validatorErrors.isEmpty()) {
-      await task.update({ content, listId, dueDate, dueTime, priority, complete });
-      res.redirect(`/home`)
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg)
-      res.render('task-edit', {
-        title: 'Edit Task',
-        task,
-        lists,
-        errors,
-        csrfToken: req.csrfToken()
-      })
-    }
-
+  if (!dueDate) {
+    dueDate = null
   }
+  if (!dueTime) {
+    dueTime = null
+  }
+
+  console.log('LIST ID HERE NOW =====> ', listId)
+
+  const validatorErrors = validationResult(req)
+
+  if (validatorErrors.isEmpty()) {
+    await task.update({ content, listId, dueDate, dueTime, priority, complete });
+    res.redirect(`/home`)
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg)
+    res.render('task-edit', {
+      title: 'Edit Task',
+      task,
+      lists,
+      errors,
+      csrfToken: req.csrfToken()
+    })
+  }
+
+
 }))
 
 

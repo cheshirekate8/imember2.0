@@ -35,8 +35,6 @@ block content
             select(name="listId")
               each list in lists
                 option(value=list.id) #{list.name}
-                script
-                  =console.log('LIST ID HEREEEEEEEE =>', list.id)
           //- div.formGroup
             //- label(for="content") Task
             //- input(type="text", name="content")
