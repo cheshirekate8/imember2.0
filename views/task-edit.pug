@@ -19,7 +19,7 @@ block content
       a(href='/') Home
       +validationErrorSummary(errors)
       body
-        form(action="/tasks/new" method="post")
+        form(action=`/tasks/${task.id}/edit` method="post")
           input(type="hidden", name="_csrf" value=csrfToken)
           +field('Task', 'content', task.content)
           +field('Due Date', 'dueDate', task.dueDate, 'date')
@@ -38,4 +38,4 @@ block content
                 script
                   =console.log('LIST ID HEREEEEEEEE =>', list.id)
           div.buttonGroup
-            button(type="submit") Create
+            button(type="submit") Edit

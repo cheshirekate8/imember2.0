@@ -102,6 +102,49 @@ router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, re
   })
 }))
 
+router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, taskValidators, asyncHandler(async (req, res, next) => {
+
+  const id = parseInt(req.params.id, 10);
+
+  const task = await db.Task.findByPk(id);
+
+  const { userId } = req.session.auth
+
+  const lists = await db.List.findAll({
+    where : {
+      'user_Id' : userId
+    }
+  })
+
+  if (task) {
+
+    const {
+      content,
+      dueDate,
+      dueTime,
+      priority,
+      complete,
+    } = req.body
+
+    const validatorErrors = validationResult(req)
+
+    if (validatorErrors.isEmpty()) {
+      await task.update({ content, dueDate, dueTime, priority, complete });
+      res.redirect(`/home`)
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg)
+      res.render('task-edit', {
+        title: 'Edit Task',
+        task,
+        lists,
+        errors,
+        csrfToken: req.csrfToken()
+      })
+    }
+
+  }
+}))
+
 
 // delete task
 router.delete('/delete/:id(\\d+)', asyncHandler(async (req, res, next) => {
