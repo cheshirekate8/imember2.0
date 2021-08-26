@@ -16,7 +16,7 @@ append head
 
 block content
     .main
-      a(href='/') Home
+      a(href='/home') Home
       +validationErrorSummary(errors)
       body
         form(action=`/tasks/${task.id}/edit` method="post")
@@ -34,8 +34,6 @@ block content
             label(for="listId") Which list?
             select(name="listId")
               each list in lists
-                option(value=task.list_Id) #{list.name}
-                script
-                  =console.log('LIST ID HEREEEEEEEE =>', list.id)
+                option(value=task.listId) #{list.name}
           div.buttonGroup
             button(type="submit") Edit

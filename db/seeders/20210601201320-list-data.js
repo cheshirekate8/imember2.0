@@ -9,8 +9,8 @@ module.exports = {
       Example:
       */
     return queryInterface.bulkInsert('Lists', [
-      { name: 'To-Do', user_Id: 1 },
-      { name: 'To Buy', user_Id: 1 }
+      { name: 'To-Do', userId: 1 },
+      { name: 'To Buy', userId: 1 }
     ], {});
   },
 

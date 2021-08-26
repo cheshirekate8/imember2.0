@@ -18,7 +18,7 @@ router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, ne
   const id = req.session.auth.userId
   const lists = await db.List.findAll({
     where : {
-      'user_Id' : id
+      'userId' : id
     }
   })
   res.render('task-new', {
@@ -36,7 +36,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
 
     const lists = await db.List.findAll({
       where : {
-        'user_Id' : userId
+        'userId' : userId
       }
     })
 
@@ -51,8 +51,8 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
 
     const newTask = db.Task.build({
       content,
-      list_Id: listId,
-      user_Id: userId,
+      listId: listId,
+      userId: userId,
       dueDate,
       dueTime,
       priority,
@@ -90,7 +90,7 @@ router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, re
 
   const lists = await db.List.findAll({
     where : {
-      'user_Id' : userId
+      'userId' : userId
     }
   })
   // console.log(list)
@@ -112,24 +112,34 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, taskValidators, asyn
 
   const lists = await db.List.findAll({
     where : {
-      'user_Id' : userId
+      'userId' : userId
     }
   })
 
   if (task) {
 
-    const {
+    let {
       content,
+      listId,
       dueDate,
       dueTime,
       priority,
       complete,
     } = req.body
 
+    if (!dueDate) {
+      dueDate = null
+    }
+    if (!dueTime) {
+      dueTime = null
+    }
+
+    console.log('LIST ID HERE NOW =====> ', listId)
+
     const validatorErrors = validationResult(req)
 
     if (validatorErrors.isEmpty()) {
-      await task.update({ content, dueDate, dueTime, priority, complete });
+      await task.update({ content, listId, dueDate, dueTime, priority, complete });
       res.redirect(`/home`)
     } else {
       const errors = validatorErrors.array().map((error) => error.msg)
@@ -146,20 +156,22 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, taskValidators, asyn
 }))
 
 
-// delete task
-router.delete('/delete/:id(\\d+)', asyncHandler(async (req, res, next) => {
-  console.log('~~~~~~~~~~IS ANYONE THERE???')
+// GET AND POST DELETE TASKS
+router.get('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const task = await db.Task.findByPk(id);
-  if (task) {
-    await task.destroy();
-    res.status(204).end();
-    // console.log('attempt?')
-    res.redirect('/home')
-  } else {
-    next(taskValidators(id));
-    console.log(req.params)
-  }
+  res.render('task-delete', {
+    title: 'Delete List',
+    task,
+    csrfToken: req.csrfToken()
+  })
+}))
+
+router.post('/:id(\\d+)/delete', asyncHandler(async (req, res, next) => {
+  const id = parseInt(req.params.id);
+  const task = await db.Task.findByPk(id);
+  await task.destroy();
+  res.redirect(`/home`)
 }))
 
 

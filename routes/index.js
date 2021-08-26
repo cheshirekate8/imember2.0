@@ -14,13 +14,13 @@ router.get(`/home`, csrfProtection, asyncHandler(async (req, res) => {
   console.log(id)
   const tasks = await db.Task.findAll({
     where : {
-      'user_Id' : id
+      'userId' : id
     },
     include: db.List
   })
   const lists = await db.List.findAll({
     where : {
-      'user_Id' : id,
+      'userId' : id,
     }
   })
   // console.log('IS USER HERE?? -------', req.session)

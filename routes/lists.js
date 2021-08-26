@@ -46,7 +46,7 @@ router.post('/new', requireAuth, csrfProtection, listValidators, asyncHandler(as
 
     const newList = db.List.build({
       name,
-      user_Id: userId
+      userId: userId
     })
 
     const validatorErrors = validationResult(req)
@@ -75,7 +75,7 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res, ne
 
   const ListsTasks = await db.Task.findAll({
     where: {
-      list_Id: id
+      listId: id
     }
   })
 
