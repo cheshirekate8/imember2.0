@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get(`/home`, csrfProtection, asyncHandler(async (req, res) => {
-  const id = req.session.auth.userId
+  const id = await req.session.auth.userId
   console.log(id)
   const tasks = await db.Task.findAll({
     where : {

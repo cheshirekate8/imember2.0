@@ -43,6 +43,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
     const {
       content,
       dueDate,
+      dueTime,
       priority,
       complete,
       listId
@@ -53,6 +54,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       list_Id: listId,
       user_Id: userId,
       dueDate,
+      dueTime,
       priority,
       complete: complete === "off",
       // complete: false
@@ -98,6 +100,49 @@ router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, re
     lists,
     csrfToken: req.csrfToken()
   })
+}))
+
+router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, taskValidators, asyncHandler(async (req, res, next) => {
+
+  const id = parseInt(req.params.id, 10);
+
+  const task = await db.Task.findByPk(id);
+
+  const { userId } = req.session.auth
+
+  const lists = await db.List.findAll({
+    where : {
+      'user_Id' : userId
+    }
+  })
+
+  if (task) {
+
+    const {
+      content,
+      dueDate,
+      dueTime,
+      priority,
+      complete,
+    } = req.body
+
+    const validatorErrors = validationResult(req)
+
+    if (validatorErrors.isEmpty()) {
+      await task.update({ content, dueDate, dueTime, priority, complete });
+      res.redirect(`/home`)
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg)
+      res.render('task-edit', {
+        title: 'Edit Task',
+        task,
+        lists,
+        errors,
+        csrfToken: req.csrfToken()
+      })
+    }
+
+  }
 }))
 
 

@@ -19,14 +19,11 @@ block content
       a(href='/') Home
       +validationErrorSummary(errors)
       body
-        form(action="/tasks/new" method="post")
+        form(action=`/tasks/${task.id}/edit` method="post")
           input(type="hidden", name="_csrf" value=csrfToken)
           +field('Task', 'content', task.content)
-          div.formGroup
-            label(for="dueDate") Due Date
-              input(name="dueDate" value='#{task.dueDate}' type="datetime-local" onFocus='#{task.dueDate}')
-              script
-                =console.log(task.dueDate)
+          +field('Due Date', 'dueDate', task.dueDate, 'date')
+          +field('Due Time', 'dueTime', task.dueTime, 'time')
           div.formGroup
             label(for="priority") Priority
             select(name="priority" value=task.priority)
@@ -41,4 +38,4 @@ block content
                 script
                   =console.log('LIST ID HEREEEEEEEE =>', list.id)
           div.buttonGroup
-            button(type="submit") Create
+            button(type="submit") Edit
