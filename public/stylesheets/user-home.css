@@ -33,7 +33,10 @@ button:not(.logout-button) {
   /* border-bottom: solid 3px; */
   border-color: #443A7B;
   justify-content: center;
+  box-shadow: 4px 4px 5px 5px rgb(124, 121, 121);
 }
+
+
 
 .table-body {
   align-content: center;
@@ -54,6 +57,19 @@ button:not(.logout-button) {
   font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
 
+
+table.table td {
+  background-color: #fff;
+}
+
+table.table th {
+  background-color: #6b5088;
+  color: #fff;
+}
+
+
+
+
 .table-wrapper {
   display: flex;
   justify-content: center;
@@ -64,6 +80,7 @@ button:not(.logout-button) {
 .list-container {
   margin-right: 2rem;
   color: #fff;
+  min-width: 210px;
 }
 
 a {
@@ -83,6 +100,64 @@ a {
 }
 
 .list-table {
-  min-width: 300px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 2px 10px 2px 10px;
+  color: #F0E9F2;
+  background-color: #443A7B;
+  box-shadow: 4px 4px 5px 5px rgb(124, 121, 121);
+}
 
+table.list-table th {
+  background-color: #443A7B;
+  color: #fff;
+}
+table.list-table thead {
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+
+
+table.list-table td {
+  background-color: #443A7B;
+  color: #fff;
+}
+
+table.list-table button {
+  background-color: #A48ABF;
+  color: #fff;
+}
+
+table.list-table button:hover {
+  background-color: #cdaaf0;
+  font-weight: bold;
+  color: #fff;
+}
+
+table.list-table a:hover {
+  text-decoration: underline #fff;
+  list-style: square;
+  }
+
+
+.list-head {
+  background-color: #443A7B;
+}
+.list-table-body {
+  background-color: #443A7B;
+}
+
+td {
+  padding: 7px;
+  }
+
+
+body {
+    background-color: #A48ABF;
+    height: 100vh;
 }
