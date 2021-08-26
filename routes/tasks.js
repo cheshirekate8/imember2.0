@@ -11,9 +11,9 @@ const taskValidators = [
     .withMessage("Please provide a task.")
     .isLength({ max: 255 })
     .withMessage("Must not exceed 255 characters"),
-    check("list_Id")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide associate a list with a task. If you don't have any, go make one!")
+  // check("list_Id")
+  //   .exists({ checkFalsy: true })
+  //   .withMessage("Please provide associate a list with a task. If you don't have any, go make one!")
 ] //! ADD MORE VALIDATORS
 
 router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
@@ -37,6 +37,12 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
   if (req.session.auth) {
     const { userId } = req.session.auth
 
+    const lists = await db.List.findAll({
+      where : {
+        'user_Id' : userId
+      }
+    })
+
     const {
       content,
       dueDate,
@@ -45,6 +51,13 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       listId
     } = req.body
 
+    console.log(content)
+    console.log(dueDate)
+    console.log(priority)
+    console.log(listId)
+
+    let workaround = false
+
     const newTask = db.Task.build({
       content,
       list_Id: listId,
@@ -52,6 +65,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       dueDate,
       priority,
       complete: complete === "off",
+      // complete: false
     })
 
     const validatorErrors = validationResult(req)
@@ -64,6 +78,7 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       res.render('task-new', {
         title: 'Tasks',
         newTask,
+        lists,
         errors,
         csrfToken: req.csrfToken()
       })
