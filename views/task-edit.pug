@@ -1,0 +1,44 @@
+extends layout
+
+include utils.pug
+
+append head
+  link(rel="stylesheet" href="/stylesheets/forms.css")
+  link(rel="stylesheet" href="/stylesheets/task-new.css")
+
+  .header-div
+    a(href='/')
+      img(src=" ../berry-single.png", class= "berry-single")
+    h1(class="iMember-h1") iMember
+    div.logButtons
+      a(href='/users/logout' class="logout-container")
+        button(name="New List" class="logout-button") Logout
+
+block content
+    .main
+      a(href='/') Home
+      +validationErrorSummary(errors)
+      body
+        form(action="/tasks/new" method="post")
+          input(type="hidden", name="_csrf" value=csrfToken)
+          +field('Task', 'content', task.content)
+          div.formGroup
+            label(for="dueDate") Due Date
+              input(name="dueDate" value='#{task.dueDate}' type="datetime-local" onFocus='#{task.dueDate}')
+              script
+                =console.log(task.dueDate)
+          div.formGroup
+            label(for="priority") Priority
+            select(name="priority" value=task.priority)
+              option= 1
+              option= 2
+              option= 3
+          div.formGroup
+            label(for="listId") Which list?
+            select(name="listId")
+              each list in lists
+                option(value=task.list_Id) #{list.name}
+                script
+                  =console.log('LIST ID HEREEEEEEEE =>', list.id)
+          div.buttonGroup
+            button(type="submit") Create

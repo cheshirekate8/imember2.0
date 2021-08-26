@@ -17,11 +17,12 @@ append head
 block content
   .main
     a(href='/') Home
+    +validationErrorSummary(errors)
     body
-      div= list.name
-        p Delete this list?
-          form(action=`/lists/${list.id}/delete` method='post')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            button(type='submit') Delete List
-            a(class='btn btn-warning ml-2' href='/' role='button')
-              button(type='submit') Cancel
+      form(action=`/lists/${list.id}/edit` method="post")
+        input(type="hidden", name="_csrf" value=csrfToken)
+        +field('Name', 'name', list.name)
+        div.buttonGroup
+          button(type="submit") Edit List
+      a(class='btn btn-warning ml-2' href='/home' role='button')
+        button Cancel

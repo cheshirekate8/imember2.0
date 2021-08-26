@@ -97,7 +97,7 @@ router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, re
   const id = parseInt(req.params.id, 10);
   const list = await db.List.findByPk(id);
   console.log(list)
-  res.render('edit-list', {
+  res.render('list-edit', {
     title: 'Edit List',
     list,
     csrfToken: req.csrfToken()
@@ -118,10 +118,10 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, listValidators, asyn
 
     if (validatorErrors.isEmpty()) {
       await list.update({ name });
-      res.redirect(`/home`)
+      res.redirect(`/lists/${list.id}`)
     } else {
       const errors = validatorErrors.array().map((error) => error.msg)
-      res.render('edit-list', {
+      res.render('list-edit', {
         title: 'Edit List',
         list,
         errors,
@@ -138,7 +138,7 @@ router.post('/:id(\\d+)/edit', requireAuth, csrfProtection, listValidators, asyn
 router.get('/:id(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const list = await db.List.findByPk(id);
-  res.render('delete-list', {
+  res.render('list-delete', {
     title: 'Delete List',
     list,
     csrfToken: req.csrfToken()

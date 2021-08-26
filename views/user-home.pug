@@ -32,13 +32,17 @@ block content
         tr
           //- th(scope='col' class="table-col-name") Lists
           th(scope='col' class="table-col-name") Task
+          th(scope='col' class="table-col-name") List
           th(scope='col' class="table-col-name") Due
           th(scope='col' class="table-col-name") Priority
           th(scope='col' class="table-col-name") Complete
       tbody(class="table-body")
         each newTask in tasks
+          //- script.
+          //-   console.log(newTask.content)
           tr
             td(class="table-data")= newTask.content
+            td(class="table-data")= newTask.List.name
             td(class="table-data")= newTask.dueDate
             td(class="table-data")= newTask.priority
             td(class="table-data")= newTask.complete
@@ -46,5 +50,3 @@ block content
               a(href=`http://localhost:8080/tasks/delete/${newTask.id}`)
                 button(type="click" method="delete") Done!
           //- td: a(class='btn btn-primary' href=`/park/${list.id}` role='button') Details
-
-        //- each newList in lists
