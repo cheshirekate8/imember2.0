@@ -53,3 +53,19 @@ button:not(.logout-button) {
   color: #443a7b;
   font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.list-container {
+  background-color: burlywood;
+  margin-right: 3rem;
+}
+
+a {
+    text-decoration: none;
+}
