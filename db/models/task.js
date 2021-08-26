@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     list_Id: DataTypes.INTEGER,
     user_Id: DataTypes.INTEGER,
-    dueDate: DataTypes.DATE,
+    dueDate: DataTypes.DATEONLY,
+    dueTime: DataTypes.TIME,
     priority: DataTypes.INTEGER,
     complete: DataTypes.BOOLEAN
   }, {});

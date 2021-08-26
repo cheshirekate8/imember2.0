@@ -21,11 +21,15 @@ block content
       body
         form(action="/tasks/new" method="post")
           input(type="hidden", name="_csrf" value=csrfToken)
-          +field('Task', 'content', newTask.content)
-          +field('Due Date', 'dueDate', newTask.dueDate, 'datetime-local')
+          +field('Task', 'content', task.content)
+          div.formGroup
+            label(for="dueDate") Due Date
+              input(name="dueDate" value='#{task.dueDate}' type="datetime-local" onFocus='#{task.dueDate}')
+              script
+                =console.log(task.dueDate)
           div.formGroup
             label(for="priority") Priority
-            select(name="priority")
+            select(name="priority" value=task.priority)
               option= 1
               option= 2
               option= 3
@@ -33,18 +37,8 @@ block content
             label(for="listId") Which list?
             select(name="listId")
               each list in lists
-                option(value=list.id) #{list.name}
+                option(value=task.list_Id) #{list.name}
                 script
                   =console.log('LIST ID HEREEEEEEEE =>', list.id)
-          //- div.formGroup
-            //- label(for="content") Task
-            //- input(type="text", name="content")
-          //- div.formGroup
-          //-   label(for="dueDate") Due Date
-          //-   input(type="date" name="dueDate")
-          //-   input(type="time" name="dueDate")
-          //- div.formGroup
-          //-   label(for="complete") Is Complete
-          //-   input(type="checkbox" name="complete" checked=false)
           div.buttonGroup
             button(type="submit") Create

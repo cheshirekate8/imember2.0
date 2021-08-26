@@ -23,7 +23,10 @@ module.exports = {
         references: { model: 'Users' }
       },
       dueDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
+      },
+      dueTime: {
+        type: Sequelize.TIME
       },
       priority: {
         allowNull: false,

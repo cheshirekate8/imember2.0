@@ -9,12 +9,12 @@ module.exports = {
       Example:
       */
     return queryInterface.bulkInsert('Tasks', [
-      { content: 'Milk', list_Id: 1, user_Id: 1, dueDate: null, complete: false },
-      { content: 'Eggs', list_Id: 1, user_Id: 1, dueDate: null, complete: false },
-      { content: 'Bread', list_Id: 1, user_Id: 1, dueDate: null, complete: false },
-      { content: 'Clean the Kitchen', list_Id: 1, user_Id: 1, dueDate: null, complete: false },
-      { content: 'Wash the Car', list_Id: 1, user_Id: 1, dueDate: null, complete: false},
-      { content: 'Do Homework', list_Id: 1, user_Id: 1, dueDate: null, complete: false }
+      { content: 'Milk', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false },
+      { content: 'Eggs', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false },
+      { content: 'Bread', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false },
+      { content: 'Clean the Kitchen', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false },
+      { content: 'Wash the Car', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false},
+      { content: 'Do Homework', list_Id: 1, user_Id: 1, dueDate: null, dueTime: null, complete: false }
     ], {});
   },
 

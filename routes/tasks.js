@@ -11,10 +11,7 @@ const taskValidators = [
     .withMessage("Please provide a task.")
     .isLength({ max: 255 })
     .withMessage("Must not exceed 255 characters"),
-  // check("list_Id")
-  //   .exists({ checkFalsy: true })
-  //   .withMessage("Please provide associate a list with a task. If you don't have any, go make one!")
-] //! ADD MORE VALIDATORS
+  ] //! ADD MORE VALIDATORS
 
 router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const newTask = db.Task.build()
@@ -51,13 +48,6 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
       listId
     } = req.body
 
-    console.log(content)
-    console.log(dueDate)
-    console.log(priority)
-    console.log(listId)
-
-    let workaround = false
-
     const newTask = db.Task.build({
       content,
       list_Id: listId,
@@ -90,18 +80,24 @@ router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(asy
 
 
 
-// edit list
-router.put('/:id(\\d+)', taskValidators, asyncHandler(async (req, res, next) => {
+// GET AND POST EDIT TASK
+router.get('/:id/edit', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const task = await db.Task.findByPk(id);
-  if (task) {
-    const { content } = req.body; //listid?
-    await task.update({ content,  });
-    res.json({ task })
-  } else {
-    next(taskValidators(id));
-  }
+  const { userId } = req.session.auth
 
+  const lists = await db.List.findAll({
+    where : {
+      'user_Id' : userId
+    }
+  })
+  // console.log(list)
+  res.render('task-edit', {
+    title: 'Edit Task',
+    task,
+    lists,
+    csrfToken: req.csrfToken()
+  })
 }))
 
 
