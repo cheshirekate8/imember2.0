@@ -3,18 +3,7 @@ const { check, validationResult } = require('express-validator')
 var router = express.Router()
 const { csrfProtection, asyncHandler } = require('./utils')
 const db = require('../db/models')
-
 const { requireAuth } = require('../auth')
-router.get('/', function (req, res, next) {
-  res.send('we are in tasks')
-})
-
-router.get('/new', requireAuth, asyncHandler(async (req, res, next) => {
-  const newTask = db.Task.build()
-  res.render('task', {
-    title: 'Tasks'
-  })
-}))
 
 const taskValidators = [
   check("content")
@@ -22,33 +11,47 @@ const taskValidators = [
     .withMessage("Please provide a task.")
     .isLength({ max: 255 })
     .withMessage("Must not exceed 255 characters"),
+    check("list_Id")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide associate a list with a task. If you don't have any, go make one!")
+] //! ADD MORE VALIDATORS
 
-]
+router.get('/new', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
+  const newTask = db.Task.build()
+  const id = req.session.auth.userId
+  const lists = await db.List.findAll({
+    where : {
+      'user_Id' : id
+    }
+  })
+  res.render('task-new', {
+    title: 'Tasks',
+    newTask,
+    lists,
+    csrfToken: req.csrfToken()
+  })
+}))
 
-router.post('/new', requireAuth, taskValidators, asyncHandler(async (req, res, next) => {
+
+router.post('/new', requireAuth,csrfProtection, taskValidators, asyncHandler(async (req, res, next) => {
   if (req.session.auth) {
-    const { listId, userId } = req.session.auth
+    const { userId } = req.session.auth
 
     const {
       content,
       dueDate,
-      startDate,
       priority,
-      repeat,
-      location
+      complete,
+      listId
     } = req.body
-
-    console.log('this is priority', priority)
 
     const newTask = db.Task.build({
       content,
-      list_Id: 1,
+      list_Id: listId,
       user_Id: userId,
       dueDate,
-      startDate,
-      priority: priority === "on",
-      repeat: repeat === "on",
-      location
+      priority,
+      complete: complete === "off",
     })
 
     const validatorErrors = validationResult(req)
@@ -56,10 +59,16 @@ router.post('/new', requireAuth, taskValidators, asyncHandler(async (req, res, n
     if (validatorErrors.isEmpty()) {
       await newTask.save();
       res.redirect(`/home`)
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg)
+      res.render('task-new', {
+        title: 'Tasks',
+        newTask,
+        errors,
+        csrfToken: req.csrfToken()
+      })
     }
-
   }
-
 }))
 
 
