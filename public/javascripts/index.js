@@ -29,7 +29,7 @@ window.addEventListener("load", (event)=>{
     thoughtRight.innerHTML = thoughtRightVar
     thoughtLeft.innerHTML = thoughtLeftVar
 
-    document.querySelectorAll('.logout-button')[0].setAttribute('hidden', 'true')
+    // document.querySelectorAll('.logout-button')[0].setAttribute('hidden', 'true')
     //make dynamic
 
 })

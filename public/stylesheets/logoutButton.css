@@ -1,0 +1,42 @@
+.nav-container {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link-wrapper {
+    color: #fff;
+    font-size: 16px;
+    border: 0.1em solid var(--c);
+    border-radius: 0.5em;
+    width: 100px;
+    height: 3em;
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    /* position: relative; */
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+    padding-top:15px;
+}
+
+.nav-link {
+    align-items: baseline;
+    text-align: center;
+    text-decoration: none;
+    line-height: 20px;
+}
+
+.nav-link:hover {
+    color: #A48ABF;
+    text-decoration: underline overline #A48ABF;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

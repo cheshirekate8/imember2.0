@@ -5,14 +5,16 @@ include utils.pug
 append head
   link(rel="stylesheet" href="/stylesheets/forms.css")
   link(rel="stylesheet" href="/stylesheets/task-new.css")
+  link(rel="stylesheet" href="/stylesheets/logoutButton.css")
 
   .header-div
-    a(href='/')
+    a(href='/home')
       img(src=" ../berry-single.png", class= "berry-single")
     h1(class="iMember-h1") iMember
     div.logButtons
-      a(href='/users/logout' class="logout-container")
-        button(name="New List" class="logout-button") Logout
+      ul(class='nav-container')
+        li(class='nav-link-wrapper')
+          a(class='nav-link' href="/users/logout") Logout
 
 block content
     .main
