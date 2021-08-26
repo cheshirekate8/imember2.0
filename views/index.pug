@@ -7,6 +7,7 @@ append head
   <script src="https://kit.fontawesome.com/fd280b8079.js" crossorigin="anonymous"></script>
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
+
   .header-div
     a(href='/')
       img(src=" ../berry-single.png", class= "berry-single")
@@ -17,14 +18,6 @@ append head
           a(class='nav-link' href="/users/register") Register
         li(class='nav-link-wrapper')
           a(class='nav-link' href="/users/login") Login
-    //- previous
-    //- div.logButtons
-    //-   a(href='/users/about' class='about-link' id='logBtn')
-    //-     button(name='About' class='logAndRegButtons') About
-    //-   a(href='/users/register' class='logAndReg' id='logBtn')
-    //-     button(name='Register' class='logAndRegButtons') Register
-    //-   a(href='/users/login' class='logAndReg' id='regBtn')
-    //-     button(name='Login' class='logAndRegButtons') Login
 
 block content
   div.index-text-container
