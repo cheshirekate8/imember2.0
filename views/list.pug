@@ -35,5 +35,5 @@ block content
             td(class="table-data")= newTask.priority
             td(class="table-data")= newTask.complete
             td(class="table-data")
-              a(href=`http://localhost:8080/tasks/delete/${newTask.id}`)
+              a(href=`/tasks/delete/${newTask.id}`)
                 button(type="click" method="delete") Done!
