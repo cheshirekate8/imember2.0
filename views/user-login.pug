@@ -12,8 +12,11 @@ append head
       img(src=" ../berry-single.png", class= "berry-single")
     h1(class="iMember-h1") iMember
     div.logButtons
-      a(href='/users/register' class='logAndReg' id='logBtn')
-        button(name='Register' class='logAndRegButtons') Register
+      ul(class='nav-container')
+        li(class='nav-link-wrapper')
+          a(class='nav-link' href="/users/register") Register
+        li(class='nav-link-wrapper')
+          a(class='nav-link' href="/users/login") Login
 
 block content
   body
@@ -24,8 +27,9 @@ block content
         +field('Email Address', 'email', email)
         +field('Password', 'password', null, 'password')
         div(class='submit-button')
-        button(type='submit') Login
         a(href='/users/register') Don't have an account?
-        a(href='/')
-          button(type="button") Cancel
+        button(type='submit') Login
         button(type="submit" id="demo") Demo User
+        div.cancel-container
+          a(href='/')
+            button(type="button") Cancel
