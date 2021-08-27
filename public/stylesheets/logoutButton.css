@@ -40,3 +40,9 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+.berry-single {
+    height: 80px;
+    padding: 10px;
+    background-color: transparent;
+  }

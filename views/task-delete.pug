@@ -9,7 +9,7 @@ append head
 
   .header-div
     a(href='/home')
-      img(src=" ../berry-single.png", class= "berry-single")
+      img(src="../../berry-single.png", class= "berry-single")
     h1(class="iMember-h1") iMember
     div.logButtons
       ul(class='nav-container')
@@ -20,9 +20,8 @@ block content
   .main
     a(href='/home') Home
     body
-      div= task.content
-        p Delete this task?
           form(action=`/tasks/${task.id}/delete` method='post')
+            p Delete #{task.content}?
             input(type='hidden' name='_csrf' value=csrfToken)
             button(type='submit') Delete Task
           a(class='btn btn-warning ml-2' href='/home' role='button')
